@@ -1,30 +1,47 @@
-import {StyleSheet, TextInput} from 'react-native';
 import React from 'react';
 
-const InputanWhite = ({pass, clr, wid, mrginBot, plcholder, ...rest}) => {
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+
+const InputanWhite = ({
+  error,
+  pass,
+  clr,
+  wid,
+  mrginBot,
+  plcholder,
+  onBlur,
+  ...rest
+}) => {
   return (
-    <TextInput
-      secureTextEntry={pass}
-      style={[
-        styles.inputEmail,
-        {color: clr, width: wid, marginBottom: mrginBot},
-      ]}
-      placeholder={plcholder}
-      placeholderTextColor={clr}
-      {...rest}
-    />
+    <View
+      style={{justifyContent: 'center', padding: 0, marginBottom: mrginBot}}>
+      <TextInput
+        onBlur={onBlur}
+        secureTextEntry={pass}
+        style={[styles(error).inputEmail, {color: clr, width: wid}]}
+        placeholder={plcholder}
+        placeholderTextColor={clr}
+        {...rest}
+      />
+      {error ? (
+        <Text style={{color: 'red', fontSize: 16, marginLeft: 15}}>
+          {error}
+        </Text>
+      ) : null}
+    </View>
   );
 };
 
 export default InputanWhite;
 
-const styles = StyleSheet.create({
-  inputEmail: {
-    borderColor: '#33907C',
-    borderWidth: 1,
-    borderRadius: 100,
-    fontFamily: 'Montserrat-Regular',
-    fontSize: 18,
-    paddingLeft: 20,
-  },
-});
+const styles = error =>
+  StyleSheet.create({
+    inputEmail: {
+      borderColor: error ? 'red' : '#33907C',
+      borderWidth: 1,
+      borderRadius: 100,
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 18,
+      paddingLeft: 20,
+    },
+  });

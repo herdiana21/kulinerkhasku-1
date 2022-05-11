@@ -1,5 +1,7 @@
 import React from 'react';
+
 import {createStackNavigator} from '@react-navigation/stack';
+
 import {
   HomeDashboard,
   Login,
@@ -9,17 +11,14 @@ import {
   Splash,
   Verify,
 } from '../pages';
-import {View, Text, Button} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {decrement, increment} from '../redux/actions/counter';
-import Produk from '../pages/ListProduct';
-import HasilPencarian from '../pages/HasilPencarian';
+import AddProduct from '../pages/AddProduct';
 import Artikel from '../pages/Artikel';
 import DetailProduk from '../pages/DetailProduk';
+import HasilPencarian from '../pages/HasilPencarian';
+import Produk from '../pages/ListProduct';
 import ListProductByToko from '../pages/ListProductByToko';
-import LanjutDaftarToko from '../pages/SignupToko/lanjut';
 import OrderHistory from '../pages/OrderHistory';
-import AddProduct from '../pages/AddProduct';
+import LanjutDaftarToko from '../pages/SignupToko/lanjut';
 
 const Stack = createStackNavigator();
 

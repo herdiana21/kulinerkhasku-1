@@ -11,7 +11,7 @@ const PopUp = () => {
       swipeDirection="up"
       animationIn="slideInDown"
       animationOut="slideOutUp"
-      // animationOutTiming={800}
+      animationOutTiming={800}
       onBackdropPress={() => setShow(false)}
       onBackButtonPress={() => setShow(false)}
       onSwipeComplete={() => setShow(false)}

@@ -1,6 +1,9 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
+
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
 import Modal from 'react-native-modal';
+
 import {tinggi} from '../assets/style/Style';
 
 const PopUp = () => {
@@ -11,15 +14,14 @@ const PopUp = () => {
       swipeDirection="up"
       animationIn="slideInDown"
       animationOut="slideOutUp"
-      // animationOutTiming={800}
+      animationOutTiming={1000}
       onBackdropPress={() => setShow(false)}
       onBackButtonPress={() => setShow(false)}
       onSwipeComplete={() => setShow(false)}
       hideModal={() => setShow(false)}
       deviceHeight={tinggi}
       // style={{backgroundColor: 'transparent'}}
-      // animationType="slide"
-    >
+      animationType="slide">
       <View
         style={{
           backgroundColor: '#b33939',

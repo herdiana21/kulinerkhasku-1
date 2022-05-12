@@ -1,25 +1,57 @@
-import {Button} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import Modal from 'react-native-modal';
+import {tinggi} from '../assets/style/Style';
 
-import Dialog, {DialogContent} from 'react-native-popup-dialog';
-
-const popUp = ({text, error}) => {
+const PopUp = () => {
+  let [show, setShow] = useState(true);
   return (
-    <View style={styles.container}>
-      <Button
-        title="Show Dialog"
-        onPress={() => {
-          this.setState({visible: true});
-        }}
-      />
-      <Dialog
-        visible={this.state.visible}
-        onTouchOutside={() => {
-          this.setState({visible: false});
+    <Modal
+      isVisible={show}
+      swipeDirection="up"
+      animationIn="slideInDown"
+      animationOut="slideOutUp"
+      // animationOutTiming={800}
+      onBackdropPress={() => setShow(false)}
+      onBackButtonPress={() => setShow(false)}
+      onSwipeComplete={() => setShow(false)}
+      hideModal={() => setShow(false)}
+      deviceHeight={tinggi}
+      // style={{backgroundColor: 'transparent'}}
+      // animationType="slide"
+    >
+      <View
+        style={{
+          backgroundColor: '#b33939',
+          height: 45,
+          alignItems: 'center',
+          flexDirection: 'row',
         }}>
-        <DialogContent>{text}</DialogContent>
-      </Dialog>
-    </View>
+        <TouchableOpacity
+          onPress={() => {
+            setShow(false);
+          }}>
+          <View
+            style={{
+              borderWidth: 2,
+              borderColor: '#f7f1e3',
+              borderRadius: 5,
+              paddingLeft: 8,
+              paddingRight: 8,
+              marginLeft: 15,
+              marginRight: 20,
+            }}>
+            <Text style={{fontSize: 20, color: '#f7f1e3'}}>X</Text>
+          </View>
+        </TouchableOpacity>
+        <View>
+          <Text style={{color: '#f7f1e3'}}>Hello Putri</Text>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
-export default popUp;
+export default PopUp;
+
+const styles = StyleSheet.create({});

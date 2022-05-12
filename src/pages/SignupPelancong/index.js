@@ -53,10 +53,11 @@ const Form = () => {
     repasword: '',
   };
   const dispatch = useDispatch();
-  const {status, message} = useSelector(state => state.userReducer);
+  const statusRegister = useSelector(state => state.userReducer);
   const nav = useNavigation();
   useEffect(() => {
-    if (status) {
+    console.log('Cek reducer', statusRegister.registerUserData);
+    if (statusRegister.registerUserData.status) {
       nav.navigate('Login');
     }
   }, []);

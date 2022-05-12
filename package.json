@@ -39,6 +39,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "rxjs": "^6.6.7",
+    "yarn": "^1.22.18",
     "yup": "^0.32.11"
   },
   "devDependencies": {

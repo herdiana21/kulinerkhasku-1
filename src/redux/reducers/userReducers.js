@@ -1,7 +1,9 @@
 const initialState = {
-  status: false,
-  message: '',
-  data: [],
+  registerUserData: {
+    status: false,
+    message: '',
+    data: [],
+  },
 };
 
 const userReducer = (state = initialState, actions) => {
@@ -9,9 +11,7 @@ const userReducer = (state = initialState, actions) => {
     case 'SUCCESS_REGISTER_USER':
       return {
         ...state,
-        status: actions.payload.status,
-        message: actions.payload.message,
-        data: actions.payload.data,
+        registerUserData: actions.payload.status,
       };
     default:
       return {

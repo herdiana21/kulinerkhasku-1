@@ -12,6 +12,7 @@ export const signUpUser = param => dispatch => {
       },
     )
     .then(result => {
+      console.log(result.data);
       dispatch({type: 'SUCCESS_REGISTER_USER', payload: result.data});
     })
     .catch(error => {

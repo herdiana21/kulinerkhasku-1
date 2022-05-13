@@ -1,6 +1,6 @@
 export const TAMBAH_PENGUNJUNG = 'TAMBAH_PENGUNJUNG';
 export const TAMBAH_TOKO = 'TAMBAH_TOKO';
-export const LOGIN = 'LOGIN';
+export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
 
 export const DATA_USER = 'DATA_USER';
 export const SUCCESS_REGISTER_USER = 'SUCCESS_REGISTER_USER';

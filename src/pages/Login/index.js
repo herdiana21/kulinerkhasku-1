@@ -1,3 +1,5 @@
+import React, {useEffect} from 'react';
+
 import {
   Image,
   Modal,
@@ -6,56 +8,134 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  View,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import React, {useEffect} from 'react';
-import logo from '../../assets/logo/logo2.png';
-import {tinggi, lebar} from '../../assets/style/Style';
+
+import {useNavigation} from '@react-navigation/core';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
+import {useDispatch, useSelector} from 'react-redux';
+
+import {Formik} from 'formik';
 import {useState} from 'react/cjs/react.development';
+import * as Yup from 'yup';
+
+import logo from '../../assets/logo/logo2.png';
+import {lebar, tinggi} from '../../assets/style/Style';
+import ButtonGreen from '../../components/button-green';
 import Button from '../../components/button-light-semibold';
 import InputanWhite from '../../components/inputan-white';
-import {useSelector} from 'react-redux';
+import {loginUser} from '../../redux/actions';
 
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .trim()
+    .email('Email harus valid!')
+    .required('Email harus diisi!'),
+  password: Yup.string().trim().required('Password harus diisi!'),
+});
 const Form = () => {
+  const inputData = {
+    email: '',
+    password: '',
+  };
+  const nav = useNavigation();
+  const dispatch = useDispatch();
+  const {dataUser} = useSelector(state => state.userReducer);
+  useEffect(() => {
+    if (dataUser.status) {
+      nav.navigate('HomeDashboard');
+    }
+  });
+  const onSubmit = (email, password) => {
+    dispatch(
+      loginUser({
+        email: email,
+        password: password,
+      }),
+    );
+  };
   return (
     <View style={{width: lebar / 1.2}}>
-      <InputanWhite
-        pass={false}
-        clr="#33907C"
-        plcholder="Email ID/ No Handphone"
-        mrginBot={10}
-      />
-      <InputanWhite
-        pass={true}
-        clr="#33907C"
-        plcholder="Password"
-        mrginBot={30}
-      />
-      <TouchableWithoutFeedback
-        onPress={() => {
-          alert('Hello');
+      <Formik
+        initialValues={inputData}
+        validationSchema={validationSchema}
+        onSubmit={(values, formikAction) => {
+          setTimeout(() => {
+            formikAction.resetForm();
+            formikAction.setSubmitting(false);
+            onSubmit(values.email, values.password);
+          }, 1000);
         }}>
-        <View
-          style={{
-            height: tinggi / 16,
-            backgroundColor: 'white',
-            justifyContent: 'center',
-            borderRadius: 100,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.29,
-            shadowRadius: 4.65,
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          isSubmitting,
+          handleSubmit,
+        }) => {
+          const {email, password} = values;
+          return (
+            <>
+              <InputanWhite
+                onBlur={handleBlur('email')}
+                error={touched.email && errors.email}
+                value={email}
+                pass={false}
+                clr="#33907C"
+                plcholder="Email ID/ No Handphone"
+                mrginBot={10}
+                onChangeText={handleChange('email')}
+              />
+              <InputanWhite
+                onBlur={handleBlur('password')}
+                error={touched.password && errors.password}
+                value={password}
+                pass={true}
+                clr="#33907C"
+                plcholder="Password"
+                mrginBot={30}
+                onChangeText={handleChange('password')}
+              />
+              <ButtonGreen
+                judul="Login"
+                p={48}
+                l={lebar / 1.2}
+                submitting={isSubmitting}
+                onPress={() => handleSubmit()}
+              />
+              {/* <TouchableWithoutFeedback
+                onPress={() => {
+                  alert('Hello');
+                }}>
+                <View
+                  style={{
+                    height: tinggi / 16,
+                    backgroundColor: 'white',
+                    justifyContent: 'center',
+                    borderRadius: 100,
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 3,
+                    },
+                    shadowOpacity: 0.29,
+                    shadowRadius: 4.65,
 
-            elevation: 7,
-          }}>
-          <Text style={{color: '#33907C', textAlign: 'center'}}>Login</Text>
-        </View>
-      </TouchableWithoutFeedback>
+                    elevation: 7,
+                  }}>
+                  <Text style={{color: '#33907C', textAlign: 'center'}}>
+                    Login
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback> */}
+            </>
+          );
+        }}
+      </Formik>
     </View>
   );
 };

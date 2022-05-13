@@ -19,7 +19,6 @@ import Produk from '../pages/ListProduct';
 import ListProductByToko from '../pages/ListProductByToko';
 import OrderHistory from '../pages/OrderHistory';
 import LanjutDaftarToko from '../pages/SignupToko/lanjut';
-import PopUp from '../components/popUp';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +27,7 @@ const Router = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Splash"
-        component={PopUp}
+        component={Splash}
         options={{
           headerShown: false,
         }}

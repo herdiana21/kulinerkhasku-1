@@ -47,6 +47,7 @@ const Form = () => {
   useEffect(() => {
     if (dataUser.status) {
       nav.navigate('HomeDashboard');
+      console.log('Putri');
     }
   });
 

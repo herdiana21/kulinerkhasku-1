@@ -42,12 +42,14 @@ const Form = () => {
   };
   const nav = useNavigation();
   const dispatch = useDispatch();
+
   const {dataUser} = useSelector(state => state.userReducer);
   useEffect(() => {
     if (dataUser.status) {
       nav.navigate('HomeDashboard');
     }
   });
+
   const onSubmit = (email, password) => {
     dispatch(
       loginUser({

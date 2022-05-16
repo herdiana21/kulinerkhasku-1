@@ -43,13 +43,13 @@ const Form = () => {
   const nav = useNavigation();
   const dispatch = useDispatch();
 
-  const {dataUser} = useSelector(state => state.userReducer);
+  const {infodataUser} = useSelector(state => state.userReducer);
   useEffect(() => {
-    if (dataUser.status) {
+    if (infodataUser.status) {
       nav.navigate('HomeDashboard');
       console.log('PutriM');
     }
-  });
+  }, []);
 
   const onSubmit = (email, password) => {
     dispatch(

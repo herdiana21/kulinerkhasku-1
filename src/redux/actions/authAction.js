@@ -4,7 +4,12 @@ export const signUpUser = param => dispatch => {
   axios
     .post(
       'https://kulinerkhasku21.000webhostapp.com/public/api/register_user',
-      param,
+      {
+        name: param.name,
+        email: param.email,
+        phone: param.phone,
+        password: param.password,
+      },
     )
     .then(result => {
       console.log(result.data);

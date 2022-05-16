@@ -56,8 +56,11 @@ const Form = () => {
   const statusRegister = useSelector(state => state.userReducer);
   const nav = useNavigation();
   useEffect(() => {
-    console.log('Cek reducer', statusRegister.registerUserData);
     if (statusRegister.registerUserData.status) {
+      dispatch({
+        type: 'SUCCESS_REGISTER_USER',
+        payload: {status: false, message: '', data: []},
+      });
       nav.navigate('Login');
     }
   }, []);

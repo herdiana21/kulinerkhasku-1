@@ -6,6 +6,10 @@ const initialState = {
   },
   infodataUser: {status: false, message: '', data: {}},
   dataToko: {status: false, message: '', data: []},
+  mapsData: {
+    logitude: '',
+    latitude: '',
+  },
 };
 const userReducer = (state = initialState, actions) => {
   switch (actions.type) {
@@ -18,6 +22,11 @@ const userReducer = (state = initialState, actions) => {
       return {
         ...state,
         dataUser: actions.payload,
+      };
+    case 'LOCATIONS':
+      return {
+        ...state,
+        mapsData: actions.payload,
       };
     default:
       return {

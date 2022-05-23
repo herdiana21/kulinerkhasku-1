@@ -1,3 +1,5 @@
 rootProject.name = 'TokoMakananKhas'
+include ':react-native-yandexmapkit'
+project(':react-native-yandexmapkit').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-yandexmapkit/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'

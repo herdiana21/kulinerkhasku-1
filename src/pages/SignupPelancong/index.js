@@ -10,8 +10,10 @@ import {
   View,
 } from 'react-native';
 
+import Geolocation from '@react-native-community/geolocation';
 import {useNavigation} from '@react-navigation/core';
 import {ScrollView} from 'react-native-gesture-handler';
+import {YandexMapKit, YandexMapView} from 'react-native-yandexmapkit';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 
@@ -53,6 +55,7 @@ const Form = () => {
     repasword: '',
   };
   const dispatch = useDispatch();
+
   const statusRegister = useSelector(state => state.userReducer);
   const nav = useNavigation();
   useEffect(() => {
@@ -150,6 +153,7 @@ const Form = () => {
                 pass={true}
                 onChangeText={handleChange('repasword')}
               />
+
               <ButtonGreen
                 judul="Daftar"
                 p={48}
@@ -169,6 +173,15 @@ const SignupPelancong = ({navigation}) => {
   const back = () => {
     navigation.goBack();
   };
+  const [latitude, setLat] = useState(0);
+  const [longitude, setLong] = useState(0);
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      console.log(info);
+      setLat(info.coords.latitude);
+      setLong(info.coords.longitude);
+    });
+  }, [latitude, longitude]);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -178,7 +191,7 @@ const SignupPelancong = ({navigation}) => {
         </View>
       </TouchableOpacity>
       <ScrollView>
-        <Image
+        {/* <Image
           source={logo}
           style={{
             height: 70,
@@ -189,22 +202,54 @@ const SignupPelancong = ({navigation}) => {
           }}
         />
         <Text style={[styles.text1]}>Daftar Pengunjung</Text>
-        <Text style={[styles.text2, {marginBottom: 25}]}>Buat Akun</Text>
-        <Form />
+        <Text style={[styles.text2, {marginBottom: 25}]}>Buat Akun</Text> */}
+        {/* <Form /> */}
         <View
           style={{
-            flexDirection: 'row',
+            // flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text style={[styles.text2, {marginTop: 45.5}]}>
+          {/* <Text style={[styles.text2, {marginTop: 45.5}]}>
             Sudah punya akun ?
-          </Text>
+          </Text> */}
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Login');
             }}>
             <Text style={styles.textNav}> Login</Text>
           </TouchableOpacity>
+          {/* <MapView
+            style={{flex: 1, width: window.width, height: 400}} //window pake Dimensions
+            initialRegion={{
+              latitude: -6.891156,
+              longitude: 107.570605,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}>
+            <Marker
+              coordinate={{latitude: -6.891156, longitude: 107.570605}}
+              title="Lokasi"
+            />
+            <Marker
+              coordinate={{latitude: -6.8904, longitude: 107.565273}}
+              title="Lokasi"
+            /> */}
+          {/* <Polygon
+              coordinates={[
+                {latitude: -6.891156, longitude: 107.570605},
+                {latitude: -6.8904, longitude: 107.565273},
+              ]}
+              strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
+              strokeWidth={6}
+            /> */}
+          {/* <MapViewDirections
+              origin={{latitude: -6.891156, longitude: 107.570605}}
+              destination={{latitude: -6.8904, longitude: 107.565273}}
+              apikey={'AIzaSyC1_89URWfL54ghbs2sdlZOdQWrjX9hK0Q'}
+              strokeWidth={3}
+              strokeColor="hotpink"
+            />
+          </MapView> */}
         </View>
       </ScrollView>
     </SafeAreaView>

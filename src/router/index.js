@@ -1,6 +1,9 @@
 import React from 'react';
 
+import Geolocation from '@react-native-community/geolocation';
 import {createStackNavigator} from '@react-navigation/stack';
+
+import {useDispatch} from 'react-redux';
 
 import {
   HomeDashboard,
@@ -23,6 +26,32 @@ import LanjutDaftarToko from '../pages/SignupToko/lanjut';
 const Stack = createStackNavigator();
 
 const Router = () => {
+  const [lat, setLat] = React.useState('');
+  const [long, setLong] = React.useState('');
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    Geolocation.getCurrentPosition(
+      //Will give you the current location
+      position => {
+        //getting the Longitude from the location json
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+        setLong(currentLongitude);
+        //getting the Latitude from the location json
+        const currentLatitude = JSON.stringify(position.coords.latitude);
+        setLat(currentLatitude);
+        dispatch({
+          type: 'LOCATIONS',
+          payload: {longitude: currentLongitude, latitude: currentLatitude},
+        });
+      },
+      error => alert(error.message),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+      },
+    );
+  }, []);
   return (
     <Stack.Navigator>
       <Stack.Screen

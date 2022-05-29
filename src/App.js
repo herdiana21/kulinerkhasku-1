@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
-import {PermissionsAndroid, Platform} from 'react-native';
+// import {PermissionsAndroid, Platform} from 'react-native';
+// import Geolocation from '@react-native-community/geolocation';
 
-import Geolocation from '@react-native-community/geolocation';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {Provider} from 'react-redux';

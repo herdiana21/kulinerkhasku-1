@@ -8,7 +8,6 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -47,7 +46,6 @@ const Form = () => {
   useEffect(() => {
     if (infodataUser.status) {
       nav.navigate('HomeDashboard');
-      console.log('PutriM');
     }
   }, []);
 
@@ -201,7 +199,7 @@ const Login = ({navigation}) => {
               <Button
                 teks="Toko"
                 link={() => {
-                  navigation.navigate('SignupToko');
+                  navigation.navigate('LanjutDaftarToko');
                   setShow(false);
                 }}
               />

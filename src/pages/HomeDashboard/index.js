@@ -19,8 +19,10 @@ import map from './../../assets/Icon/Maps.png';
 import ButtonWhite from '../../components/button-white';
 import ArtikelList from '../../components/card-list-artikel';
 import IconNav from '../../components/icon-navbar';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeDashboard = () => {
+  const nav = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#33907C" />
@@ -184,38 +186,48 @@ const HomeDashboard = () => {
           </ScrollView>
         </View>
       </ScrollView>
-      <View style={styles.navBottom}>
+      {/* <View style={styles.navBottom}>
         <IconNav
           url={require('../../assets/Icon/home-active.png')}
           teks="Home"
           warna={'#33907C'}
-          linkk={() => alert('Home')}
+          linkk={() => {
+            nav.navigate('HomeDashboard');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/search.png')}
           teks="Jelajahi"
           warna={'#4f4f4f'}
-          linkk={() => alert('Jelajahi')}
+          linkk={() => {
+            nav.navigate('HasilPencarian');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/store.png')}
           teks="Store"
           warna={'#4f4f4f'}
-          linkk={() => alert('Jelajahi')}
+          linkk={() => {
+            nav.navigate('MyStore');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/order.png')}
           teks="History"
           warna={'#4f4f4f'}
-          linkk={() => alert('History')}
+          linkk={() => {
+            nav.navigate('OrderHistory');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/profile.png')}
           teks="Profil"
           warna={'#4f4f4f'}
-          linkk={() => alert('Profile')}
+          linkk={() => {
+            nav.navigate('Profile');
+          }}
         />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

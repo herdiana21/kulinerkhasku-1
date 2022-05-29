@@ -10,8 +10,10 @@ import {
   TextInput,
   ImageBackground,
   Modal,
+  TouchableHighlight,
 } from 'react-native';
 import React, {useState} from 'react';
+import DatePicker from 'react-native-date-picker';
 import kembali from '../../assets/Icon/Back2.png';
 import {tinggi, lebar} from '../../assets/style/Style';
 import camera from '../../assets/Icon/Vector.png';
@@ -20,9 +22,97 @@ import nav from '../../assets/Icon/Icon.png';
 import ButtonGreen from '../../components/button-green';
 import close from '../../assets/Icon/Close.png';
 import carii from '../../assets/Icon/carii.png';
+import Button from '../../components/button-light-semibold';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {Formik} from 'formik';
 
 const LanjutDaftarToko = ({navigation}) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const bukaKamera = () => {
+    const option = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+    launchCamera(option, respon => {
+      if (respon.didCancel) {
+        console.log('Kamera dibatalkan');
+      } else if (respon.errorCode) {
+        console.log(respon.errorMessage);
+      } else {
+        const data = respon.assets;
+        console.log(data);
+      }
+    });
+  };
+
+  const bukaGaleri = () => {
+    const option = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+    launchImageLibrary(option, respon => {
+      if (respon.didCancel) {
+        console.log('Kamera dibatalkan');
+      } else if (respon.errorCode) {
+        console.log(respon.errorMessage);
+      } else {
+        const data = respon.assets;
+        console.log(data);
+      }
+    });
+  };
+
+  const Popup = () => {
+    return (
+      <SafeAreaView>
+        <Modal visible={show} animationType="slide" transparent={true}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+            }}>
+            <TouchableHighlight
+              underlayColor="#ddd"
+              onPress={() => setShow(!show)}>
+              <View
+                style={{
+                  height: tinggi / 25,
+                  backgroundColor: 'white',
+                  shadowColor: '#000',
+                  shadowOffset: {height: 15, width: 0},
+                  shadowOpacity: 5,
+                  elevation: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    backgroundColor: '#ddd',
+                    width: lebar / 2,
+                    height: 5,
+                    borderRadius: 50,
+                  }}></View>
+              </View>
+            </TouchableHighlight>
+            <View
+              style={{
+                height: tinggi / 5.3,
+                backgroundColor: '#33907C',
+                justifyContent: 'space-around',
+                paddingVertical: 10,
+                alignItems: 'center',
+              }}>
+              <Button teks="Ambil Foto" link={bukaKamera} />
+              <Button teks="Buka Berkas" link={bukaGaleri} />
+            </View>
+          </View>
+        </Modal>
+      </SafeAreaView>
+    );
+  };
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -49,19 +139,28 @@ const LanjutDaftarToko = ({navigation}) => {
               marginTop: 10,
             }}>
             <View style={styles.imageInput}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShow(!show);
+                }}>
                 <Image source={camera} style={styles.camera} />
                 <Text style={{color: '#ACADAE'}}>Max file 2mb</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.imageInput}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShow(!show);
+                }}>
                 <Image source={camera} style={styles.camera} />
                 <Text style={{color: '#ACADAE'}}>Max file 2mb</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.imageInput}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShow(!show);
+                }}>
                 <Image source={camera} style={styles.camera} />
                 <Text style={{color: '#ACADAE'}}>Max file 2mb</Text>
               </TouchableOpacity>
@@ -70,20 +169,80 @@ const LanjutDaftarToko = ({navigation}) => {
           <Text style={{color: '#33907C'}}>
             Pastikan kamu mengambil foto dari berbagai sudut pandang
           </Text>
-          <TextInput
-            multiline={true}
-            placeholder="Alamat lengkap"
-            placeholderTextColor="#33907C"
-            style={{
-              borderWidth: 1,
-              borderRadius: 16,
-              borderColor: '#33907C',
-              marginTop: 40,
-              height: tinggi / 5,
-              color: '#33907C',
-              padding: 20,
-              textAlignVertical: 'top',
+          {/* <Formik
+            initialValues={inputan}
+            validationSchema={validationSchema}
+            onSubmit={(values, formikAction) => {
+              setTimeout(() => {
+                formikAction.resetForm();
+                formikAction.setSubmitting(false);
+                onSubmit(values.alamat, values.deskripsi);
+              }, 2000);
+            }}>
+            {({
+              values,
+              errors,
+              touched,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => {
+              const {alamat, deskripsi} = values;
             }}
+            <TextInput
+              multiline={true}
+              placeholder="Alamat lengkap"
+              placeholderTextColor="#33907C"
+              style={{
+                borderWidth: 1,
+                borderRadius: 16,
+                borderColor: '#33907C',
+                marginTop: 40,
+                height: tinggi / 5,
+                color: '#33907C',
+                padding: 20,
+                textAlignVertical: 'top',
+              }}
+            />
+            <TextInput
+              multiline={true}
+              placeholder="Deskripsi Toko"
+              placeholderTextColor="#33907C"
+              style={{
+                borderWidth: 1,
+                borderRadius: 16,
+                borderColor: '#33907C',
+                marginTop: 40,
+                height: tinggi / 5,
+                color: '#33907C',
+                padding: 20,
+                textAlignVertical: 'top',
+              }}
+            />
+          </Formik> */}
+
+          <Text style={{color: '#33907C', marginTop: 35, marginBottom: 15}}>
+            Jam Buka
+          </Text>
+          <DatePicker
+            date={date}
+            onDateChange={setDate}
+            mode="time"
+            androidVariant="nativeAndroid"
+            textColor="#33907C"
+            locale="id"
+          />
+          <Text style={{color: '#33907C', marginTop: 35, marginBottom: 15}}>
+            Jam Tutup
+          </Text>
+          <DatePicker
+            date={date}
+            onDateChange={setDate}
+            mode="time"
+            androidVariant="nativeAndroid"
+            textColor="#33907C"
+            locale="id"
           />
           <Text style={{color: '#33907C', marginTop: 35, marginBottom: 15}}>
             Lokasi toko kamu
@@ -202,6 +361,7 @@ const LanjutDaftarToko = ({navigation}) => {
           </View>
         </Modal>
       </ScrollView>
+      <Popup />
     </SafeAreaView>
   );
 };

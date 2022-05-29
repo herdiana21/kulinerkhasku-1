@@ -13,7 +13,7 @@ import {
 import {useNavigation} from '@react-navigation/core';
 import {ScrollView} from 'react-native-gesture-handler';
 
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -61,7 +61,7 @@ const Form = () => {
         type: 'SUCCESS_REGISTER_USER',
         payload: {status: false, message: '', data: []},
       });
-      nav.navigate('Login');
+      nav.navigate('Verify');
     }
   }, []);
   const onSubmit = (name, email, phone, password) => {

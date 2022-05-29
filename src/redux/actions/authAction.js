@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {dispatch} from 'rxjs/internal/observable/pairs';
 
 export const signUpUser = param => dispatch => {
   axios
@@ -16,10 +17,8 @@ export const signUpUser = param => dispatch => {
       dispatch({type: 'SUCCESS_REGISTER_USER', payload: result.data});
     })
     .catch(error => {
+      console.log('Error');
       console.log(error);
-    })
-    .then(result => {
-      console.log('masuk');
     });
 };
 
@@ -49,5 +48,19 @@ export const doLogoutUser = param => {
     })
     .catch(error => {
       console.log('');
+    });
+};
+
+export const signupToko = param => dispatch => {
+  axios
+    .post(
+      'https://kulinerkhasku21.000webhostapp.com/public/api/register_store_owner',
+      param,
+    )
+    .then(result => {
+      dispatch({type: 'SUCCESS_REGISTER_TOKO', payload: result.data});
+    })
+    .catch(error => {
+      console.log(error);
     });
 };

@@ -19,8 +19,10 @@ import cilok from '../../assets/image/cilok.jpg';
 import edit from '../../assets/Icon/Edit.png';
 import trash from '../../assets/Icon/trash.png';
 import close from '../../assets/Icon/Close.png';
+import {useNavigation} from '@react-navigation/native';
 
 const MyStore = () => {
+  const nav = useNavigation();
   const Card = props => {
     return (
       <View
@@ -220,38 +222,48 @@ const MyStore = () => {
           </View>
         </View>
       </View>
-      <View style={styles.navBottom}>
+      {/* <View style={styles.navBottom}>
         <IconNav
           url={require('../../assets/Icon/home.png')}
           teks="Home"
           warna={'#4f4f4f'}
-          linkk={() => alert('Home')}
+          linkk={() => {
+            nav.navigate('HomeDashboard');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/search.png')}
           teks="Jelajahi"
           warna={'#4f4f4f'}
-          linkk={() => alert('Jelajahi')}
+          linkk={() => {
+            nav.navigate('HasilPencarian');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/store-active.png')}
           teks="Store"
           warna={'#33907C'}
-          linkk={() => alert('Jelajahi')}
+          linkk={() => {
+            nav.navigate('MyStore');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/order.png')}
           teks="History"
           warna={'#4f4f4f'}
-          linkk={() => alert('History')}
+          linkk={() => {
+            nav.navigate('OrderHistory');
+          }}
         />
         <IconNav
           url={require('../../assets/Icon/profile.png')}
           teks="Profil"
           warna={'#4f4f4f'}
-          linkk={() => alert('Profile')}
+          linkk={() => {
+            nav.navigate('Profile');
+          }}
         />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

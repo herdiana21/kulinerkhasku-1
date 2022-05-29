@@ -96,7 +96,7 @@ const OrderHistory = () => {
           <Card />
         </ScrollView>
       </View>
-      <View style={styles.navBottom}>
+      {/* <View style={styles.navBottom}>
         <IconNav
           url={require('../../assets/Icon/home.png')}
           teks="Home"
@@ -127,7 +127,7 @@ const OrderHistory = () => {
           warna={'#4f4f4f'}
           linkk={() => alert('Profile')}
         />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

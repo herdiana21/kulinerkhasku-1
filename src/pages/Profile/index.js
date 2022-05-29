@@ -114,7 +114,7 @@ const Profile = () => {
           <ButtonGreen judul="Logout" p={45} l={300} />
         </View>
       </View>
-      <View style={styles.navBottom}>
+      {/* <View style={styles.navBottom}>
         <IconNav
           url={require('../../assets/Icon/home.png')}
           teks="Home"
@@ -145,7 +145,7 @@ const Profile = () => {
           warna={'#33907C'}
           linkk={() => alert('Profile')}
         />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

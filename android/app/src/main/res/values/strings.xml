@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TokoMakananKhas</string>
+    <string name="mapbox_access_token">Ypk.eyJ1IjoiaGVyZGlhbmEyMSIsImEiOiJjbDNkdzdldnQwMjh1M2lsdGM5bTc4YTlqIn0.UMIDmgtIULaXW0-XzTSjGg</string>
 </resources>

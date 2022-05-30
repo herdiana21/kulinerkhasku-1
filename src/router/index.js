@@ -1,11 +1,9 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useDispatch} from 'react-redux';
 
 import {
   HomeDashboard,
@@ -92,6 +90,32 @@ const HomeTab = () => {
 };
 
 const Router = () => {
+  // const [lat, setLat] = React.useState('');
+  // const [long, setLong] = React.useState('');
+  // const dispatch = useDispatch();
+  // React.useEffect(() => {
+  //   Geolocation.getCurrentPosition(
+  //     //Will give you the current location
+  //     position => {
+  //       //getting the Longitude from the location json
+  //       const currentLongitude = JSON.stringify(position.coords.longitude);
+  //       setLong(currentLongitude);
+  //       //getting the Latitude from the location json
+  //       const currentLatitude = JSON.stringify(position.coords.latitude);
+  //       setLat(currentLatitude);
+  //       dispatch({
+  //         type: 'LOCATIONS',
+  //         payload: {longitude: currentLongitude, latitude: currentLatitude},
+  //       });
+  //     },
+  //     error => alert(error.message),
+  //     {
+  //       enableHighAccuracy: true,
+  //       timeout: 20000,
+  //       maximumAge: 1000,
+  //     },
+  //   );
+  // }, []);
   return (
     <Stack.Navigator>
       <Stack.Screen
